@@ -5,9 +5,11 @@ import httpx
 from tools.config import config_all
 from tools.tor_ip import get_tor_ip
 from tools.url_parse import run_url
+from first_websites_list.onion_crawler import run_websites_list
 
 config_all=config_all()
-
+# tor代理设置
+socks5h_proxy="socks5://{}:{}".format(config_all.tor_proxy_ip,config_all.tor_proxy_port)
 
 
 def get_argparse()-> argparse.ArgumentParser:
@@ -16,23 +18,26 @@ def get_argparse()-> argparse.ArgumentParser:
     parser.add_argument("-w","--websites_list",type=str,choices=["config"],help="crawl websites from config.ini and get onion list.")
     return parser
 
-def all_run(args):
-    # tor代理设置
-    socks5h_proxy="socks5://{}:{}".format(config_all.tor_proxy_ip,config_all.tor_proxy_port)
+def all_run(args,client):
     # print(args)
     if args.url:
-        with httpx.Client(proxies=socks5h_proxy,timeout=10) as client:
-            # 检查是否为tor代理
-            if get_tor_ip(client):
-                run_url(client,args.url)
+        run_url(client,args.url)
     elif args.websites_list == "config":
-        print("config")
+        run_websites_list()
 
 
 if __name__ == "__main__":
     try:
         args_parser=get_argparse()
         args=args_parser.parse_args()
-        all_run(args)
+        # 检查是否存在tor代理，否则退出
+        with httpx.Client(proxies=socks5h_proxy, timeout=10) as client:
+            try:
+                 if get_tor_ip(client):
+                    all_run(args,client)
+            except Exception as e:
+                print(e)
+                print("Please check your tor proxy!!!")
+
     except KeyboardInterrupt:
         print("\nInterrupt received! Exit now!")

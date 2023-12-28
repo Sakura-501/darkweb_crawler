@@ -26,3 +26,23 @@
 | _id | source | url  | is_crawl | title | head | body |
 |-----|--------|------|----------|-------|------|------|
 | xxx | 来源索引网站 | 当前网站 | 1        | xxx   | xxx  | xxx  |
+
+## 使用前配置
+### tor网络
+[安装参考网址，先看这个！！！](https://hanblog.fun/2021/04/07/2021-4-7-tor-simple-configer/)
+```shell
+brew install tor
+
+To start tor now and restart at login:
+  brew services start tor
+Or, if you don't want/need a background service you can just run:
+  /opt/homebrew/opt/tor/bin/tor
+
+# 配置文件在：
+cd /opt/homebrew/etc/tor
+
+# 命令行使用：
+export all_proxy=socks5h://127.0.0.1:9050
+或者直接启动挂在后台
+tor
+```
