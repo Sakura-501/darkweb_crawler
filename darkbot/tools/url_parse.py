@@ -25,8 +25,8 @@ def run_url(client,args_url):
         print("title: \n"+title)
         body=soup.find("body").get_text().strip()
         print("body: \n"+body)
-        print(args_url+": insert_title_body_to_table")
-        insert_title_body_to_table(args_url,title,body)
+        # print(args_url+": insert_title_body_to_table")
+        # insert_title_body_to_table(args_url,title,body)
 
 
 # T

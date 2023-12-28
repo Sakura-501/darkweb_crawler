@@ -19,6 +19,10 @@ class config_all:
         self.mysql_database = config["mysql"]["database"]
         self.mysql_charset = config["mysql"]["charset"]
 
+        self.mongo_host=config["mongo"]["host"]
+        self.mongo_port=config["mongo"]["port"]
+        self.mongo_database=config["mongo"]["database"]
+
         self.first_websites_list=list(set(config["first_websites"]["onion_list"]))
 
 
