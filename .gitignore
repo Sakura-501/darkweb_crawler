@@ -1,0 +1,14 @@
+.DS_Store
+test.py
+create_mysql.py
+
+# mongodb
+data*
+
+# Cache
+.cache
+*.pyc
+.pytestc*
+.pytest_cache
+__pycache*
+__pycache__/*
