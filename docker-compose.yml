@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+#  mysql:
+#    image: mysql:latest
+#    container_name: mysql_darkweb_crawler
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: darkweb_crawler
+##      MYSQL_USER: crawler
+##      MYSQL_PASSWORD: crawler
+#    ports:
+#      - '3307:3306'
+#    volumes:
+#      - ./mysql_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_darkweb_crawler
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db
+      - ./data/logs:/data/logs
