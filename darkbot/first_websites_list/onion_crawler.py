@@ -6,12 +6,10 @@ from tools.config import config_all
 from tools.create_mongo import mongo_latest
 
 config_all = config_all()
-onion_list_collection_name = "onion_list"
-onion_content_collection_name = "onion_content"
+onion_list_collection_name = config_all.mongo_onion_list_collection_name
+onion_content_collection_name = config_all.mongo_onion_content_collection_name
 mongo_instance = mongo_latest()
 db = mongo_instance.db
-
-
 
 def insert_onion_content(url, crawl_time, status, title, head, body):
     now_collection = db[onion_content_collection_name]
@@ -37,7 +35,7 @@ def grep_title_head_body_onion(text):
     # onion_url_pattern = r"https?://[^\s)(,'\"]+.onion"
     onion_url_pattern = r"[\w]{16}.onion|[\w]{56}.onion"
     result_of_onion = list(set(re.findall(onion_url_pattern, text,re.IGNORECASE|re.MULTILINE)))
-    print(result_of_onion)
+    # print(result_of_onion)
 
     return title, head, body, result_of_onion
 
@@ -45,12 +43,15 @@ def grep_title_head_body_onion(text):
 def crawl_and_get_collection_all_data(client: httpx.Client, seed):
     result_of_onion = []
     url= seed
-    resp = client.get(url)
-    status = resp.status_code
-    if status == 200:
-        title, head, body, result_of_onion = grep_title_head_body_onion(resp.text)
-    else:
-        title, head, body, result_of_onion = None, None, None, None
+    try:
+        resp = client.get(url)
+        status = resp.status_code
+        if status == 200:
+            title, head, body, result_of_onion = grep_title_head_body_onion(resp.text)
+        else:
+            title, head, body, result_of_onion = None, None, None, None
+    except:
+        status,title, head, body, result_of_onion = None, None, None, None,None
 
     return url,  status, title, head, body, result_of_onion
 
