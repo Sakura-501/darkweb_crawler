@@ -9,6 +9,7 @@ from tools.tor_ip import get_tor_ip
 from tools.url_parse import run_url
 from first_websites_list.onion_crawler import run_websites_list
 from second_active_crawl.active_crawler import run_active_crawl
+from third_search_keywords import search_one_keyword,search_keywords_from_config
 
 config_all = config_all()
 # tor代理设置
@@ -25,6 +26,8 @@ def get_argparse() -> argparse.ArgumentParser:
                         help="crawl websites from config.ini and get onion list.")
     parser.add_argument("-a", "--active_crawl", type=str, choices=["from_collection"],
                         help="active crawling for onion_url from mongodb_collection and get new onion domain.")
+    parser.add_argument("-s", "--search_keywords", type=str,
+                        help="search keywords([from_config] OR [the_keywords_you_input]) in https://ahmia.fi/ and get onion_url.")
     return parser
 
 
@@ -36,7 +39,11 @@ def all_run(args, client):
         run_websites_list(client)
     elif args.active_crawl == "from_collection":
         run_active_crawl(client)
-
+    elif args.search_keywords is not None:
+        if args.search_keywords == "from_config":
+            search_keywords_from_config(client,config_all.third_search_keywords)
+        else:
+            search_one_keyword(client,args.search_keywords)
     else:
         args_parser.print_help()
 

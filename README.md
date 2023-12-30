@@ -16,9 +16,9 @@
 
 ### onion_content集合
 
-| _id | url  | crawl_time | status     | title | head | body |
-|-----|------|------------|------------|-------|------|------|
-| xxx | 当前网站 | xxxx       | 200/302... | xxx   | xxx  | xxx  |
+| _id | url  | crawl_time | status      | title | head | body |
+|-----|------|------------|-------------|-------|------|------|
+| xxx | 当前网站 | xxxx       | 200/302/... | xxx   | xxx  | xxx  |
 
 ## 使用前配置
 ### tor网络

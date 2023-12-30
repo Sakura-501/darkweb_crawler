@@ -26,5 +26,6 @@ class config_all:
         self.mongo_onion_content_collection_name=config["mongo"]["onion_content_collection_name"]
 
         self.first_websites_list=list(set(json.loads(config["first_websites"]["onion_list"])))
+        self.third_search_keywords=list(set(json.loads(config["third_search"]["keywords"])))
 
 
