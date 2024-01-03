@@ -14,7 +14,10 @@ db = mongo_instance.db
 def insert_onion_content(url, crawl_time, status, title, head, body):
     now_collection = db[onion_content_collection_name]
     insert_data = {"url": url, "crawl_time": crawl_time, "status": status, "title": title, "head": head, "body": body}
-    now_collection.insert_one(insert_data)
+    try:
+        now_collection.insert_one(insert_data)
+    except Exception as e:
+        print(e)
 
 # 有去重
 def insert_onion_list(source,url,crawl_time):
@@ -22,7 +25,10 @@ def insert_onion_list(source,url,crawl_time):
     find_data = {"url":url}
     if now_collection.find_one(find_data) is None:
         insert_data = {"source":source,"url":url,"crawl_time":crawl_time}
-        now_collection.insert_one(insert_data)
+        try:
+            now_collection.insert_one(insert_data)
+        except Exception as e:
+            print(e)
 
 def grep_title_head_body_onion(text):
     result_of_onion = []

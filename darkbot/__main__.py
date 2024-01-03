@@ -7,8 +7,8 @@ import httpx
 from tools.config import config_all
 from tools.tor_ip import get_tor_ip
 from tools.url_parse import run_url
-from first_websites_list.onion_crawler import run_websites_list
-from second_active_crawl.active_crawler import run_active_crawl
+from first_websites_list import run_websites_list
+from second_active_crawl import run_active_crawl
 from third_search_keywords import search_one_keyword,search_keywords_from_config
 
 config_all = config_all()

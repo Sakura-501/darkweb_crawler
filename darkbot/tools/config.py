@@ -12,18 +12,20 @@ class config_all:
         self.tor_proxy_ip=config["tor"]["ip"]
         self.tor_proxy_port=config["tor"]["port"]
 
-        self.mysql_host=config["mysql"]["host"]
-        self.mysql_port = int(config["mysql"]["port"])
-        self.mysql_user = config["mysql"]["user"]
-        self.mysql_password = config["mysql"]["password"]
-        self.mysql_database = config["mysql"]["database"]
-        self.mysql_charset = config["mysql"]["charset"]
+        # self.mysql_host=config["mysql"]["host"]
+        # self.mysql_port = int(config["mysql"]["port"])
+        # self.mysql_user = config["mysql"]["user"]
+        # self.mysql_password = config["mysql"]["password"]
+        # self.mysql_database = config["mysql"]["database"]
+        # self.mysql_charset = config["mysql"]["charset"]
 
         self.mongo_host=config["mongo"]["host"]
         self.mongo_port=config["mongo"]["port"]
         self.mongo_database=config["mongo"]["database"]
         self.mongo_onion_list_collection_name=config["mongo"]["onion_list_collection_name"]
         self.mongo_onion_content_collection_name=config["mongo"]["onion_content_collection_name"]
+
+        self.whether_crawl_again=config["setting"]["whether_crawl_again"]
 
         self.first_websites_list=list(set(json.loads(config["first_websites"]["onion_list"])))
         self.third_search_keywords=list(set(json.loads(config["third_search"]["keywords"])))
