@@ -30,5 +30,6 @@ class config_all:
 
         self.first_websites_list=list(set(json.loads(config["first_websites"]["onion_list"])))
         self.third_search_keywords=list(set(json.loads(config["third_search"]["keywords"])))
+        self.fourth_tor2web_keywords=list(set(json.loads(config["fourth_tor2web"]["keywords"])))
 
 
