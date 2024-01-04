@@ -40,6 +40,7 @@ def all_run(args, client):
     elif args.active_crawl == "from_collection":
         run_active_crawl(client)
     elif args.search_keywords is not None:
+        print("start search_words_for_onion!")
         if args.search_keywords == "from_config":
             search_keywords_from_config(client,config_all.third_search_keywords)
         else:
