@@ -24,6 +24,8 @@ def check_repeat_content_and_internal_time(check_url):
         res=now_collection.find({"url":check_url},{"crawl_time":1,"_id":0}).sort("crawl_time").limit(1)
         now_time=datetime.datetime.now()
         if (now_time-res[0]["crawl_time"]).days > config_all.internal_time_to_crawl:
+            return True
+        else:
             return False
     return True
 
@@ -42,7 +44,7 @@ def run_active_crawl(client: httpx.Client):
         for one_url in prepare_all_onion_url:
             one_url=one_url["url"]
             if one_url not in already_crawl_onion_url:
-                # 检查是否已经访问过了
+                # 检查是否已经访问过了且访问时间是否大于30天
                 if check_repeat_content_and_internal_time(one_url):
                     current_time=datetime.datetime.now()
                     print(one_url+" is crawling!")
