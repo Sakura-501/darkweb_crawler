@@ -26,6 +26,7 @@ class config_all:
         self.mongo_onion_content_collection_name=config["mongo"]["onion_content_collection_name"]
 
         self.whether_crawl_again=config["setting"]["whether_crawl_again"]
+        self.internal_time_to_crawl=int(config["setting"]["internal_time_to_crawl"])
 
         self.first_websites_list=list(set(json.loads(config["first_websites"]["onion_list"])))
         self.third_search_keywords=list(set(json.loads(config["third_search"]["keywords"])))
