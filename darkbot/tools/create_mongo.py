@@ -1,5 +1,5 @@
 import pymongo
-from config import config_all
+from .config import config_all
 
 config_all = config_all()
 
