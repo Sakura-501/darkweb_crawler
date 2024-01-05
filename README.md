@@ -1,4 +1,10 @@
 # darkweb_crawler(darkbot)
+## 使用教程
+```shell
+nohup python3 darkbot -a from_collection > log/active_crawl.log 2>&1 &
+nohup python3 darkbot -t from_config from_config > log/tor2web_crawl.log 2>&1 &
+```
+
 ## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
 1. 基于暗网索引网站/github等网站获取onion域名(41751)
 ![img.png](img.png)
@@ -22,7 +28,7 @@
 | xxx | 当前网站 | xxxx       | 200/302/... | xxx   | xxx  | xxx  |
 
 ## 使用前配置
-### tor网络
+### mac配置tor网络
 [安装参考网址，先看这个！！！](https://hanblog.fun/2021/04/07/2021-4-7-tor-simple-configer/)
 ```shell
 brew install tor

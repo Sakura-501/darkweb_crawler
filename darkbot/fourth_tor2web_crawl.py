@@ -41,11 +41,12 @@ def google_search_tor2web_keyword(one_keyword):
         real_url="https://www.google.com/search?q=site:{}&start={}".format(one_keyword,str(i))
         headers = {"User-Agent": random.choice(config_all.user_agents)}
         # client = httpx.Client(proxies=config_all.socks5h_proxy, timeout=15, headers=headers, follow_redirects=True, verify=False)
-        client = httpx.Client(proxies=config_all.socks5_proxy,timeout=15, headers=headers, follow_redirects=False, verify=False)
+        client = httpx.Client(timeout=15, headers=headers, follow_redirects=False, verify=False)
         try:
             resp=client.get(real_url)
             tmp_result=grep_tor2web_onion_result(resp.text,one_keyword)
             result_of_onion.extend(tmp_result)
+            # print(result_of_onion)
             insert_results_of_onion_to_collection(tmp_result,real_url)
         except Exception as e:
             print(e)
@@ -79,7 +80,7 @@ def bing_search_tor2web_keyword(one_keyword):
     # 第一页
     bing_url=f"https://www.bing.com/search?q=site:{one_keyword}&first=1"
     headers = {"User-Agent": random.choice(config_all.user_agents)}
-    client = httpx.Client(proxies=config_all.socks5_proxy,timeout=15, headers=headers, follow_redirects=False, verify=False)
+    client = httpx.Client(timeout=15, headers=headers, follow_redirects=False, verify=False)
     resp=client.get(bing_url)
     result_of_onion.extend(grep_tor2web_onion_result(resp.text,one_keyword))
     insert_results_of_onion_to_collection(result_of_onion, bing_url)
@@ -88,7 +89,7 @@ def bing_search_tor2web_keyword(one_keyword):
     for i in range(7,1000,10):
         bing_url = f"https://www.bing.com/search?q=site:{one_keyword}&first={i}"
         headers = {"User-Agent": random.choice(config_all.user_agents)}
-        client = httpx.Client(proxies=config_all.socks5_proxy, timeout=15, headers=headers, follow_redirects=False,
+        client = httpx.Client( timeout=15, headers=headers, follow_redirects=False,
                               verify=False)
         try:
             resp = client.get(bing_url)

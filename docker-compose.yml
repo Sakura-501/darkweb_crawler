@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
 #  mysql:
 #    image: mysql:latest
@@ -14,12 +14,21 @@ services:
 #    volumes:
 #      - ./mysql_data:/var/lib/mysql
 
-  mongodb:
-    image: mongo:latest
-    container_name: mongo_darkweb_crawler
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - ./data/db:/data/db
-      - ./data/logs:/data/logs
+   mongodb:
+     image: mongo:latest
+     container_name: mongo_darkweb_crawler
+     restart: always
+     ports:
+       - 27017:27017
+     volumes:
+       - ./data/db:/data/db
+       - ./data/logs:/data/logs
+#  mongodb:
+#    image: sakura501/mongo_darkweb_crawler
+#    container_name: mongo_darkweb_crawler
+#    restart: always
+#    ports:
+#      - 27017:27017
+#    volumes:
+#      - ./data/db:/data/db
+#      - ./data/logs:/data/logs

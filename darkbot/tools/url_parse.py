@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from .create_mysql import mysql_latest
+from create_mysql import mysql_latest
 import datetime
 
 
