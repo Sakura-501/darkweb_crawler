@@ -1,8 +1,9 @@
 # darkweb_crawler(darkbot)
 ## 使用教程
 ```shell
+service tor start
 nohup python3 darkbot -a from_collection > log/active_crawl.log 2>&1 &
-nohup python3 darkbot -t from_config from_config > log/tor2web_crawl.log 2>&1 &
+nohup python3 darkbot -t from_config > log/tor2web_crawl.log 2>&1 &
 ```
 
 ## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
