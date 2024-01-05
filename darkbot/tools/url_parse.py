@@ -3,19 +3,19 @@ from .create_mysql import mysql_latest
 import datetime
 
 
-def insert_title_body_to_table(args_url,title,body):
-    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    insert_title_body_sql="insert into title_body(time_stamp,url,title,body) values(%s,%s,%s,%s)"
-
-    mysql_instance = mysql_latest()
-    db = mysql_instance.db
-    cursor = mysql_instance.cursor
-    try:
-        cursor.execute(insert_title_body_sql,(current_time,args_url,title,body))
-        db.commit()
-    except Exception as e:
-        db.rollback()
-        print(e)
+# def insert_title_body_to_table(args_url,title,body):
+#     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     insert_title_body_sql="insert into title_body(time_stamp,url,title,body) values(%s,%s,%s,%s)"
+#
+#     mysql_instance = mysql_latest()
+#     db = mysql_instance.db
+#     cursor = mysql_instance.cursor
+#     try:
+#         cursor.execute(insert_title_body_sql,(current_time,args_url,title,body))
+#         db.commit()
+#     except Exception as e:
+#         db.rollback()
+#         print(e)
 
 def run_url(client,args_url):
     resp=client.get(url=args_url)

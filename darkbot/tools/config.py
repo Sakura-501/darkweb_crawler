@@ -11,6 +11,11 @@ class config_all:
         # 详细配置
         self.tor_proxy_ip=config["tor"]["ip"]
         self.tor_proxy_port=config["tor"]["port"]
+        self.tor_proxy = "socks5://{}:{}".format(self.tor_proxy_ip, self.tor_proxy_port)
+
+        self.socks5_ip=config["socks5"]["ip"]
+        self.socks5_port=config["socks5"]["port"]
+        self.socks5_proxy="socks5://{}:{}".format(self.socks5_ip,self.socks5_port)
 
         # self.mysql_host=config["mysql"]["host"]
         # self.mysql_port = int(config["mysql"]["port"])
@@ -27,6 +32,8 @@ class config_all:
 
         self.whether_crawl_again=config["setting"]["whether_crawl_again"]
         self.internal_time_to_crawl=int(config["setting"]["internal_time_to_crawl"])
+        self.time_sleep_to_next_crawl=int(config["setting"]["time_sleep_to_next_crawl"])
+        self.user_agents=list(set(json.loads(config["setting"]["user_agents"])))
 
         self.first_websites_list=list(set(json.loads(config["first_websites"]["onion_list"])))
         self.third_search_keywords=list(set(json.loads(config["third_search"]["keywords"])))

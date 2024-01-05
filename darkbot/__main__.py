@@ -1,4 +1,5 @@
 import argparse
+import random
 import traceback
 
 import httpx
@@ -13,8 +14,7 @@ from third_search_keywords import search_one_keyword,search_keywords_from_config
 from fourth_tor2web_crawl import run_tor2web_crawl
 
 config_all = config_all()
-# tor代理设置
-socks5h_proxy = "socks5://{}:{}".format(config_all.tor_proxy_ip, config_all.tor_proxy_port)
+# 访问头设置
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/115.0"}
 
 
@@ -36,8 +36,7 @@ def get_argparse() -> argparse.ArgumentParser:
     return parser
 
 
-def all_run(args, client):
-    # print(args)
+def all_run(args,client):
     if args.url:
         run_url(client, args.url)
     elif args.websites_list == "from_config":
@@ -51,7 +50,7 @@ def all_run(args, client):
         else:
             search_one_keyword(client,args.search_keywords)
     elif args.tor2web_crawl == "from_config":
-        run_tor2web_crawl(client)
+        run_tor2web_crawl()
     else:
         args_parser.print_help()
 
@@ -61,13 +60,15 @@ if __name__ == "__main__":
         args_parser = get_argparse()
         args = args_parser.parse_args()
         # 检查是否存在tor代理，否则退出
-        with httpx.Client(proxies=socks5h_proxy, timeout=15, headers=headers) as client:
-            try:
-                if get_tor_ip(client):
-                    all_run(args, client)
-            except Exception as e:
-                traceback.print_exc()
-                print("Please check your tor proxy OR other problems!!!")
+        try:
+            client = httpx.Client(proxies=config_all.tor_proxy, timeout=15, headers=headers,follow_redirects=False,verify=False)
+            if get_tor_ip(client):
+                all_run(args,client)
+            client.close()
+
+        except Exception as e:
+            traceback.print_exc()
+            print("Please check your tor proxy OR other problems!!!")
 
     except KeyboardInterrupt:
         print("\nInterrupt received! Exit now!")
