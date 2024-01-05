@@ -1,11 +1,11 @@
 # darkweb_crawler(darkbot)
 ## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
-1. 基于暗网索引网站/github等网站获取onion域名(41,751)
+1. 基于暗网索引网站/github等网站获取onion域名(41751)
 ![img.png](img.png)
 2. 基于爬虫解析页面主动获取onion域名(crawling)
 3. 基于ahmia.fi暗网搜索引擎搜索关键字获取onion域名(15918,2-new)
 ![img_2.png](img_2.png)
-4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(待完成)
+4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(完成)
 5. 基于Telegram/Twitter等交流工具获取onion域名(待完成)
 6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
 
