@@ -42,11 +42,14 @@ def google_search_tor2web_keyword(one_keyword):
         headers = {"User-Agent": random.choice(config_all.user_agents)}
         # client = httpx.Client(proxies=config_all.socks5h_proxy, timeout=15, headers=headers, follow_redirects=True, verify=False)
         client = httpx.Client(proxies=config_all.socks5_proxy,timeout=15, headers=headers, follow_redirects=False, verify=False)
-        resp=client.get(real_url)
-        tmp_result=grep_tor2web_onion_result(resp.text,one_keyword)
-        result_of_onion.extend(tmp_result)
-        print(result_of_onion)
-        insert_results_of_onion_to_collection(tmp_result,real_url)
+        try:
+            resp=client.get(real_url)
+            tmp_result=grep_tor2web_onion_result(resp.text,one_keyword)
+            result_of_onion.extend(tmp_result)
+            insert_results_of_onion_to_collection(tmp_result,real_url)
+        except Exception as e:
+            print(e)
+        client.close()
         time.sleep(3)
     return list(set(result_of_onion))
 
@@ -58,23 +61,59 @@ def duckduckgo_search_tor2web_keyword(one_keyword):
         data={"q":f"site:{one_keyword}","dc":f"{i}","s":"50","kl":"wt-wt","o":"json"}
         headers = {"User-Agent": random.choice(config_all.user_agents)}
         client = httpx.Client(timeout=15, headers=headers, follow_redirects=False, verify=False)
-        resp=client.post(duckduckgo_url,data=data)
-        result_of_onion.extend(grep_tor2web_onion_result(resp.text,one_keyword))
-        # print(result_of_onion)
+        try:
+            resp=client.post(duckduckgo_url,data=data)
+            result_of_onion.extend(grep_tor2web_onion_result(resp.text,one_keyword))
+        except Exception as e:
+            print(e)
+        client.close()
         time.sleep(3)
+
     result_of_onion=list(set(result_of_onion))
     insert_results_of_onion_to_collection(result_of_onion,duckduckgo_url+one_keyword)
     return result_of_onion
+
+# 首页为6个，第二页从第7个开始，每页10个
+def bing_search_tor2web_keyword(one_keyword):
+    result_of_onion = []
+    # 第一页
+    bing_url=f"https://www.bing.com/search?q=site:{one_keyword}&first=1"
+    headers = {"User-Agent": random.choice(config_all.user_agents)}
+    client = httpx.Client(proxies=config_all.socks5_proxy,timeout=15, headers=headers, follow_redirects=False, verify=False)
+    resp=client.get(bing_url)
+    result_of_onion.extend(grep_tor2web_onion_result(resp.text,one_keyword))
+    insert_results_of_onion_to_collection(result_of_onion, bing_url)
+    client.close()
+    # 第二页开始
+    for i in range(7,1000,10):
+        bing_url = f"https://www.bing.com/search?q=site:{one_keyword}&first={i}"
+        headers = {"User-Agent": random.choice(config_all.user_agents)}
+        client = httpx.Client(proxies=config_all.socks5_proxy, timeout=15, headers=headers, follow_redirects=False,
+                              verify=False)
+        try:
+            resp = client.get(bing_url)
+            tmp_result=grep_tor2web_onion_result(resp.text,one_keyword)
+            result_of_onion.extend(tmp_result)
+            insert_results_of_onion_to_collection(tmp_result,bing_url)
+        except Exception as e:
+            print(e)
+        client.close()
+        time.sleep(3)
+
+    return list(set(result_of_onion))
+
 
 def run_tor2web_crawl():
     print("start running tor2web_keywords_crawl!!!")
     google_result_of_onion=[]
     duckduckgo_result_of_onion=[]
+    bing_result_of_onion=[]
     for one_keyword in tor2web_keywords:
-        print(f"start search tor2web_keywords: {one_keyword}!")
+        print(f"start search tor2web_keywords: {one_keyword}")
 
-        # google_result_of_onion.extend(google_search_tor2web_keyword(one_keyword))
+        google_result_of_onion.extend(google_search_tor2web_keyword(one_keyword))
         duckduckgo_result_of_onion.extend(duckduckgo_search_tor2web_keyword(one_keyword))
+        bing_result_of_onion.extend(bing_search_tor2web_keyword(one_keyword))
 
         time.sleep(5)
 
@@ -82,3 +121,5 @@ def run_tor2web_crawl():
     print("google_length: "+str(len(google_result_of_onion)))
     duckduckgo_result_of_onion=list(set(duckduckgo_result_of_onion))
     print("duckduckgo_length: "+str(len(duckduckgo_result_of_onion)))
+    bing_result_of_onion=list(set(bing_result_of_onion))
+    print("bing_length: "+str(len(bing_result_of_onion)))
