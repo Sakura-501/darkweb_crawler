@@ -23,6 +23,9 @@ services:
      volumes:
        - ./data/db:/data/db
        - ./data/logs:/data/logs
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: xxx
+       MONGO_INITDB_ROOT_PASSWORD: xxx
 #  mongodb:
 #    image: sakura501/mongo_darkweb_crawler
 #    container_name: mongo_darkweb_crawler

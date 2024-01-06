@@ -35,6 +35,7 @@ def insert_results_of_onion_to_collection(result_of_onion,real_url):
         insert_onion_list(real_url, tmp_url2)
 
 def google_search_tor2web_keyword(one_keyword):
+    print(f"google search_keyword: {one_keyword}")
     result_of_onion=[]
     # for i in range(1,10,10):
     for i in range(1,1000,10):
@@ -56,6 +57,7 @@ def google_search_tor2web_keyword(one_keyword):
 
 # 我超，lite居然可以！！！
 def duckduckgo_search_tor2web_keyword(one_keyword):
+    print(f"duckduckgo search_keyword: {one_keyword}")
     result_of_onion=[]
     duckduckgo_url="https://lite.duckduckgo.com/lite/"
     for i in range(1,10,50):
@@ -76,6 +78,7 @@ def duckduckgo_search_tor2web_keyword(one_keyword):
 
 # 首页为6个，第二页从第7个开始，每页10个
 def bing_search_tor2web_keyword(one_keyword):
+    print(f"bing search_keyword: {one_keyword}")
     result_of_onion = []
     # 第一页
     bing_url=f"https://www.bing.com/search?q=site:{one_keyword}&first=1"
