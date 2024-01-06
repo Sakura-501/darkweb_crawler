@@ -27,6 +27,8 @@ class config_all:
 
         self.mongo_host = config["mongo"]["host"]
         self.mongo_port = config["mongo"]["port"]
+        self.mongo_username=config["mongo"]["username"]
+        self.mongo_password=config["mongo"]["password"]
         self.mongo_database = config["mongo"]["database"]
         self.mongo_onion_list_collection_name = config["mongo"]["onion_list_collection_name"]
         self.mongo_onion_content_collection_name = config["mongo"]["onion_content_collection_name"]
