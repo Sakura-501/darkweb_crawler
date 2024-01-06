@@ -1,5 +1,6 @@
 # darkweb_crawler(darkbot)
 ## 使用教程
+注意先改名：config.ini/docker-compose.yml
 ```shell
 service tor start
 nohup python3 darkbot -a from_collection >> log/active_crawl.log 2>&1 &
@@ -17,6 +18,12 @@ nohup python3 darkbot -t from_config >> log/tor2web_crawl.log 2>&1 &
 6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
 
 ## darkweb_crawler数据库设计
+### mongodb迁移指南
+```shell
+docker exec -it xxxx /bin/bash
+docker exec -it xxxx /bin/bash
+mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_crawler /data/logs/dump/darkweb_crawler/
+```
 ### onion_list集合
 | _id | source | url     | crawl_time |
 |-----|--------|---------|------------|
