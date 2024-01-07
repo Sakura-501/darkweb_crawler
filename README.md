@@ -21,12 +21,50 @@ mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_
 | xxx | 当前网站 | xxxx       | 200/302/... | xxx   | xxx  | xxx  |
 
 
-## 使用教程
-注意先改名：config.ini/docker-compose.yml
+## 使用教程(后台运行 OR 定时启动)
+注意先改名：config.ini/docker-compose.yml  
+`python darkbot`查看使用简介
 ```shell
-service tor start
-nohup python3 darkbot -a from_collection >> log/active_crawl.log 2>&1 &
-nohup python3 darkbot -t from_config >> log/tor2web_crawl.log 2>&1 &
+usage: darkbot [-h] [-u URL] [-w {from_config}] [-a {from_collection}] [-s SEARCH_KEYWORDS] [-t {from_config}]
+
+a bot for darkweb_crawler.
+
+options:
+  -h, --help            show this help message and exit
+  -u URL, --url URL     Choose a url to crawl.
+  -w {from_config}, --websites_list {from_config}
+                        crawl websites from config.ini and get onion list.
+  -a {from_collection}, --active_crawl {from_collection}
+                        active crawling for onion_url from mongodb_collection and get new onion domain.
+  -s SEARCH_KEYWORDS, --search_keywords SEARCH_KEYWORDS
+                        search keywords([from_config] OR [the_keywords_you_input]) in https://ahmia.fi/ and get onion_url.
+  -t {from_config}, --tor2web_crawl {from_config}
+                        search tor2web_keywords in google/duckduckgo/bing to get onion domain.
+```
+### screen后台运行
+补充：**可以不用定时启动，screen太香啦！**
+```shell
+# 启动一个screen任务窗口
+screen -S darkweb_crawler
+./darkweb_crawler_run.sh
+# 然后可以Ctrl+a+d挂在后台
+# 查看全部screen任务
+screen -ls
+# 恢复screen窗口
+screen -r {pid}
+或者
+screen -r darkweb_crawler
+# 删除screen任务
+exit
+```
+### 定时启动
+```shell
+# 先添加执行权限
+chmod +x darkweb_crawler_run.sh
+# 设置定时启动命令
+crontab -e
+# 然后把当前路径的telegram_crawler_run.sh添加进去
+0 0 * * * /path/to/darkweb_crawler_run.sh
 ```
 
 ## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
@@ -59,6 +97,6 @@ export all_proxy=socks5h://127.0.0.1:9050
 或者直接启动挂在后台
 tor
 ```
-# 记录
+## 记录
 ahmia.fi关键词搜索才出来俩个新的
 ![img_1.png](img_1.png)
