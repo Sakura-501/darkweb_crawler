@@ -97,6 +97,8 @@ export all_proxy=socks5h://127.0.0.1:9050
 或者直接启动挂在后台
 tor
 ```
+### pip
+`pip install -r requirements.txt`
 ## 记录
 ahmia.fi关键词搜索才出来俩个新的
 ![img_1.png](img_1.png)
