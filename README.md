@@ -1,26 +1,7 @@
 # darkweb_crawler(darkbot)
-## 使用教程
-注意先改名：config.ini/docker-compose.yml
-```shell
-service tor start
-nohup python3 darkbot -a from_collection >> log/active_crawl.log 2>&1 &
-nohup python3 darkbot -t from_config >> log/tor2web_crawl.log 2>&1 &
-```
-
-## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
-1. 基于暗网索引网站/github等网站获取onion域名(41751)
-![img.png](img.png)
-2. 基于爬虫解析页面主动获取onion域名(crawling)
-3. 基于ahmia.fi暗网搜索引擎搜索关键字获取onion域名(15918,2-new)
-![img_2.png](img_2.png)
-4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(完成)
-5. 基于Telegram/Twitter等交流工具获取onion域名(待完成)
-6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
-
 ## darkweb_crawler数据库设计
 ### mongodb迁移指南
 ```shell
-docker exec -it xxxx /bin/bash
 docker exec -it xxxx /bin/bash
 mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_crawler /data/logs/dump/darkweb_crawler/
 ```
@@ -34,6 +15,26 @@ mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_
 | _id | url  | crawl_time | status      | title | head | body |
 |-----|------|------------|-------------|-------|------|------|
 | xxx | 当前网站 | xxxx       | 200/302/... | xxx   | xxx  | xxx  |
+
+
+## 使用教程
+注意先改名：config.ini/docker-compose.yml
+```shell
+service tor start
+nohup python3 darkbot -a from_collection >> log/active_crawl.log 2>&1 &
+nohup python3 darkbot -t from_config >> log/tor2web_crawl.log 2>&1 &
+```
+
+## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
+1. 基于暗网索引网站/github等网站获取onion域名(41751)  
+![img.png](img.png)
+2. 基于爬虫解析页面主动获取onion域名(完成，crawling)
+3. 基于ahmia.fi暗网搜索引擎搜索关键字获取onion域名(15918,2-new)  
+![img_2.png](img_2.png)
+4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(2-16-191，由于搜索引擎存在风控，需要优化，serpapi是个好东西，可惜收费)  
+![img_3.png](img_3.png)
+5. 基于Telegram等交流工具获取onion域名(完成)
+6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
 
 ## 使用前配置
 ### mac配置tor网络

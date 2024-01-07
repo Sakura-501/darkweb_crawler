@@ -39,6 +39,7 @@ def google_search_tor2web_keyword(one_keyword):
     result_of_onion=[]
     # for i in range(1,10,10):
     for i in range(1,1000,10):
+        # https://www.google.com/search?q=site:onion.to&start=1
         real_url="https://www.google.com/search?q=site:{}&start={}".format(one_keyword,str(i))
         headers = {"User-Agent": random.choice(config_all.user_agents)}
         # client = httpx.Client(proxies=config_all.socks5h_proxy, timeout=15, headers=headers, follow_redirects=True, verify=False)
@@ -116,8 +117,11 @@ def run_tor2web_crawl():
         print(f"start search tor2web_keywords: {one_keyword}")
 
         google_result_of_onion.extend(google_search_tor2web_keyword(one_keyword))
+        print(google_result_of_onion)
         duckduckgo_result_of_onion.extend(duckduckgo_search_tor2web_keyword(one_keyword))
+        print(duckduckgo_result_of_onion)
         bing_result_of_onion.extend(bing_search_tor2web_keyword(one_keyword))
+        print(bing_result_of_onion)
 
         time.sleep(5)
 
