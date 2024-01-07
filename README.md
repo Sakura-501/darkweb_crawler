@@ -2,8 +2,12 @@
 ## darkweb_crawler数据库设计
 ### mongodb迁移指南
 ```shell
+# 先导出
 docker exec -it xxxx /bin/bash
-mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_crawler /data/logs/dump/darkweb_crawler/
+mongodump -u[username] -p[password] --authenticationDatabase admin 
+# 再导入
+docker exec -it xxxx /bin/bash
+mongorestore -u[username] -p[password]--authenticationDatabase admin -d darkweb_crawler /data/logs/darkweb_crawler/darkweb_crawler/
 ```
 ### onion_list集合
 | _id | source | url     | crawl_time |
