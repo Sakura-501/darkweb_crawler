@@ -53,7 +53,7 @@ def google_search_tor2web_keyword(one_keyword):
         except Exception as e:
             print(e)
         client.close()
-        time.sleep(3)
+        time.sleep(30)
     return list(set(result_of_onion))
 
 # 我超，lite居然可以！！！
@@ -71,7 +71,7 @@ def duckduckgo_search_tor2web_keyword(one_keyword):
         except Exception as e:
             print(e)
         client.close()
-        time.sleep(3)
+        time.sleep(30)
 
     result_of_onion=list(set(result_of_onion))
     insert_results_of_onion_to_collection(result_of_onion,duckduckgo_url+one_keyword)
@@ -103,7 +103,7 @@ def bing_search_tor2web_keyword(one_keyword):
         except Exception as e:
             print(e)
         client.close()
-        time.sleep(3)
+        time.sleep(30)
 
     return list(set(result_of_onion))
 
@@ -123,7 +123,7 @@ def run_tor2web_crawl():
         bing_result_of_onion.extend(bing_search_tor2web_keyword(one_keyword))
         print(bing_result_of_onion)
 
-        time.sleep(5)
+        time.sleep(10)
 
     google_result_of_onion=list(set(google_result_of_onion))
     print("google_length: "+str(len(google_result_of_onion)))
