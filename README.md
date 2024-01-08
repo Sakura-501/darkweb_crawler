@@ -70,12 +70,12 @@ crontab -e
 
 ## 六种onion域名收集方式(按照"[\w]{16}.onion|[\w]{56}.onion"规则匹配域名，后续插入自行添加http或者https)
 1. 基于暗网索引网站/github等网站获取onion域名(41751)  
-![img.png](img.png)
+![img.png](img/img.png)
 2. 基于爬虫解析页面主动获取onion域名(完成，crawling)
 3. 基于ahmia.fi暗网搜索引擎搜索关键字获取onion域名(15918,2-new)  
-![img_2.png](img_2.png)
+![img_2.png](img/img_2.png)
 4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(2-16-191，由于搜索引擎存在风控，需要优化，serpapi是个好东西，可惜收费)  
-![img_3.png](img_3.png)
+![img_3.png](img/img_3.png)
 5. 基于Telegram等交流工具获取onion域名(完成)
 6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
 
@@ -102,4 +102,4 @@ tor
 `pip install -r requirements.txt`
 ## 记录
 ahmia.fi关键词搜索才出来俩个新的
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
