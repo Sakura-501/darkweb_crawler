@@ -98,6 +98,14 @@ export all_proxy=socks5h://127.0.0.1:9050
 或者直接启动挂在后台
 tor
 ```
+### linux-tor
+```shell
+apt install tor
+#配置文件linux在/etc/tor/torrc
+vim /etc/tor/torrc
+# 加入下面的：
+```
+
 ### pip
 `pip install -r requirements.txt`
 ## 记录

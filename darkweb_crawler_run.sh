@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Stop last darkweb_crawler_run.sh first, Please wait for a moment!"
-pkill -f "darkweb_crawler_run.sh"
+#pkill -f "darkweb_crawler_run.sh"
 while [ 1 ]; do
     #nohup command > output.log 2>&1 &
     echo "1. 从config.ini获取暗网索引网站/github等网站获取onion域名。"
