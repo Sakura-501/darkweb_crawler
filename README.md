@@ -76,8 +76,9 @@ crontab -e
 ![img_2.png](img/img_2.png)
 4. 基于torweb的搜索引擎(google/duckduckgo/bing)获取onion域名(2-16-191，由于搜索引擎存在风控，需要优化，serpapi是个好东西，可惜收费)  
 ![img_3.png](img/img_3.png)
-5. 基于Telegram等交流工具获取onion域名(完成)
-6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)
+5. 基于Telegram等交流工具获取onion域名(完成)  
+
+~~6. 基于部署具有hsdir(隐藏服务节点)标签的节点被动获取onion域名(待完成)~~
 
 ## 使用前配置
 ### mac配置tor网络
